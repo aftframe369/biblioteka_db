@@ -1,7 +1,14 @@
 create DATABASE biblioteka_lodzgorna;
 use biblioteka_lodzgorna;
 
-CREATE TABLE ksiazki ();
+CREATE TABLE egzemplarz (
+	Id varchar(12);
+); 
+
+CREATE TABLE ksiazki (
+	Id varchar(12);
+	Tytul varchar(127);
+);
 
 CREATE TABLE autorzy ();
 

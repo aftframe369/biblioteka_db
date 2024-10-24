@@ -5,23 +5,73 @@ CREATE TABLE egzemplarz (
 	Id varchar(12);
 ); 
 
-CREATE TABLE ksiazki (
+CREATE TABLE tytul (
 	Id varchar(12);
 	Tytul varchar(127);
+	Rok YEAR;
+	Ilosc_stron int;
+
+	foreign key wydawnictwo;
+	foreign key kategoria;
+	foreign key pion;
 );
 
-CREATE TABLE autorzy ();
+CREATE TABLE autorzy (
+	Id varchar(5);
+	Imie varchar(20);
+	Nazwisko varchar(100);
+	Uwagi varchar(255);
+);
 
-CREATE TABLE kategoria ();
+CREATE TABLE kategoria (
+	Id varchar(2);
+	Nazwa varchar(30);
 
-CREATE TABLE podkategoria ();
+	foreign key id_pionu();
+);
 
-CREATE TABLE miejsce ();
+CREATE TABLE wydawnictwo (
+	Id varchar(4);
+);
 
-CREATE TABLE osoba ();
+CREATE TABLE pion ();
 
-CREATE TABLE uzytkownik ();
+CREATE TABLE podkategoria (
+	Id	varchar(4);
+	Nazwa varchar(125);
 
-CREATE TABLE bibliotekarz ();
+	foreign key Kategoria();
+
+);
+
+CREATE TABLE miejsce (
+	nazwa varchar(20);
+);
+
+CREATE TABLE osoba (
+	id varchar(4);
+	nr_ewidencji varchar(sprawdzić);
+	przydzial
+	imie
+	nazwisko
+);
+
+CREATE TABLE uzytkownik (
+	id_osoby
+);
+
+CREATE TABLE bibliotekarz (
+	rok_dolaczenia
+	czy_w_disco
+);
+
+
+CREATE TABLE karta_wypozyczenia (
+	ksiazka
+	osoba
+	data wypozyczenia
+	data oddania
+)
+
 
 

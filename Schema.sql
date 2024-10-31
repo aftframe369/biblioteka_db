@@ -3,33 +3,35 @@ use biblioteka_lodzgorna;
 
 
 CREATE TABLE egzemplarz (
-	id int not null unique,
-	id_w_kategori int(2) not null,
+	id int not null,
 
-	Kategoria int(2) not null,
-	Podkategoria_1 int(2) not null,
-	Podkategoria_2 int(2) not null,
 	Id_tytulu int(3) not null,
 
-	unique (Kategoria, Podkategoria_1, Podkategoria_2, Id_tytulu, id ),
-	primary key (Kategoria, Podkategoria_1, Podkategoria_2, Id_tytulu, id )
-	Constraint kategoria >0 kategoria < 100
+	unique (Id_tytulu, id ),
+	primary key (Id_tytulu, id ),
+
+	Constraint id_w_zakresie check (
+		id >=0 and id <= 99
+)
 ); 
 
 CREATE TABLE tytul (
-	Id int unique not null,
-	ID_w_kategorii int unique not null,
+	Id int unsigned unique not null,
+	ID_w_kategorii int(3) unsigned not null ,
 	Tytul varchar(255),
+
 	Rok YEAR,
-	Ilosc_stron int,
+	Ilosc_stron int unsigned,
 
 	kategoria varchar(2),
 	wydawnictwo varchar(4).
-	pion varchar(1),
 
 	unique(kategoria, ID_w_kategorii),
-	primary key (Id)
-	Constraint kategoria >0 kategoria < 100
+	primary key (Id),
+
+	Constraint id_w_zakresie check (
+		ID_w_kategorii >=0 and ID_w_kategorii <= 999
+)
 );
 
 CREATE TABLE autor (
@@ -45,18 +47,27 @@ CREATE TABLE kategoria (
 	Id int(2) unique not null,
 	Nazwa varchar(30) unique not null,
 
-	Constraint kategoria >0 kategoria < 100
+	Constraint id_w_zakresie check (
+		Id >=0 and Id <= 99
+)
 );
 
-CREATE TABLE podkategoria (
-	Id int(2) not null,
-	Kategoria int(2) not null,
-	Podkategoria_nadzredna int(2),
-	Nazwa varchar(125) unique not null,
 
-	unique(kategoria, nr_podkategorii),
-	primary key(kategoria, nr_podkategorii),
-);
+-- To trzeba wymyśliiić!!
+-- CREATE TABLE podkategoria (
+-- 	Id int(2) not null,
+-- 	Parent int(2) not null,
+-- 	Nazwa varchar(125) unique not null,
+--
+-- 	unique(Parent , Id ),
+-- 	unique(Parent , Nazwa),
+-- 	primary key(Kategoria, Id),
+--
+--
+-- 	Constraint id_w_zakresie check (
+-- 		Id >=0 and Id <= 99
+-- )
+-- );
 
 CREATE TABLE wydawnictwo (
 	Id int(4) unique not null,
@@ -68,25 +79,26 @@ CREATE TABLE pion (
 );
 
 CREATE TABLE miejsce (
-	nazwa char(20) unique not null,
+	nazwa varchar(20) unique not null,
 );
 
 CREATE TABLE osoba (
 	Id int(4) unique not null,
 	Nr_ewidencji char(11) unique,
 	Przydzial char(15),
-	Imie varchar(20),
-	Nazwisko varchar(20),
-	Nr_telefonu char(9)
+	Imie varchar(20) not null,
+	Nazwisko varchar(20) not null,
+	Nr_telefonu char(9) unique,
+	mail varchar(20) unique
 );
 
 CREATE TABLE uzytkownik (
-	id_osoby int(4) unique not null,
+	id_osoby int(4) unique not null primary key,
 	data_rejestracji DATE,
 );
 
 CREATE TABLE bibliotekarz (
-	Id_osoby int(4) unique not null,
+	Id_osoby int(4) unique not null primary key,
 	rok_dolaczenia Date,
 	czy_w_disco bool,
 );
@@ -95,7 +107,7 @@ CREATE TABLE karta_wypozyczenia (
 	ksiazka_id int,
 	osoba_id int,
 	data_wypozyczenia DATE,
-	data_oddania DATE,
+	data_oddania DATE default null,
 )
 
 

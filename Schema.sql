@@ -24,7 +24,7 @@ CREATE TABLE tytul (
 	Ilosc_stron int unsigned,
 
 	kategoria varchar(2),
-	wydawnictwo varchar(4).
+	wydawnictwo varchar(4),
 
 	unique(kategoria, ID_w_kategorii),
 	primary key (Id),
@@ -71,15 +71,15 @@ CREATE TABLE kategoria (
 
 CREATE TABLE wydawnictwo (
 	Id int(4) unique not null,
-	Nazwa varchar(255) unique not null,
+	Nazwa varchar(255) unique not null
 );
 
 CREATE TABLE pion (
-	Nazwa char(2) unique not null,
+	Nazwa char(2) unique not null
 );
 
 CREATE TABLE miejsce (
-	nazwa varchar(20) unique not null,
+	nazwa varchar(20) unique not null
 );
 
 CREATE TABLE osoba (
@@ -94,20 +94,20 @@ CREATE TABLE osoba (
 
 CREATE TABLE uzytkownik (
 	id_osoby int(4) unique not null primary key,
-	data_rejestracji DATE,
+	data_rejestracji DATE
 );
 
 CREATE TABLE bibliotekarz (
 	Id_osoby int(4) unique not null primary key,
 	rok_dolaczenia Date,
-	czy_w_disco bool,
+	czy_w_disco bool
 );
 
 CREATE TABLE karta_wypozyczenia (
 	ksiazka_id int,
 	osoba_id int,
 	data_wypozyczenia DATE,
-	data_oddania DATE default null,
+	data_oddania DATE default null
 )
 
 

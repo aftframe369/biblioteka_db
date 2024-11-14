@@ -19,11 +19,11 @@ CREATE TABLE egzemplarz (
 CREATE TABLE tytul (
 	ID int unique not null,
 	ID_w_kategorii int(3) unsigned not null ,
+	ID_kategorii int,
+	ID_wydawnictwa int,
 	Tytul varchar(255),
 	Rok YEAR,
 	Ilosc_stron int unsigned,
-	Kategoria int,
-	Wydawnictwo int,
 
 	unique(kategoria, ID_w_kategorii),
 	primary key (ID),
